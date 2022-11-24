@@ -1,0 +1,71 @@
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include<math.h>
+void display(void)
+{
+
+glClear (GL_COLOR_BUFFER_BIT);
+
+
+
+  glColor3f (0.5, 0.5, 0.0);
+  glBegin(GL_QUADS);
+  glVertex3f(0.30f, 0.10f, 0.0f);
+  glVertex3f(0.50f, 0.10f, 0.0f);
+  glVertex3f(0.50f, 0.31f, 0.0f);
+  glVertex3f(0.30f, 0.31f, 0.0f);
+
+  glEnd();
+
+  glColor3f (0.0, 1.0, 0.0);
+  glBegin(GL_QUADS);
+  glVertex3f(0.32f, 0.12f, 0.0f);
+  glVertex3f(0.48f, 0.12f, 0.0f);
+  glVertex3f(0.48f, 0.29f, 0.0f);
+  glVertex3f(0.32f, 0.29f, 0.0f);
+
+  glEnd();
+
+  glColor3f (1.0, 0.0, 0.0);
+   glBegin(GL_POLYGON);
+ for(int i=0; i<500000; i++)
+ {
+     int theta = i*(3.1416/180);
+     glVertex2f(0.40+0.06*sin(theta),0.20+0.06*cos(theta));
+ }
+ glEnd();
+
+
+
+
+
+glFlush ();
+}
+void init (void)
+{
+/* select clearing (background) color */
+glClearColor (0.0, 0.0, 0.0, 0.0);
+/* initialize viewing values */
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(0.0, 1.0, 0.0, 1.0, -10.0, 10.0);
+}
+/*
+* Declare initial window size, position, and display mode
+* (single buffer and RGBA). Open window with "hello"
+* in its title bar. Call initialization routines.
+* Register callback function to display graphics.
+* Enter main loop and process events.
+*/
+int main(int argc, char** argv)
+{
+glutInit(&argc, argv);
+glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+glutInitWindowSize (600, 600);
+glutInitWindowPosition (100, 100);
+glutCreateWindow ("hello");
+init ();
+glutDisplayFunc(display);
+glutMainLoop();
+return 0; /* ISO C requires main to return int. */
+}
